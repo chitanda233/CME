@@ -178,6 +178,7 @@ namespace CMExcel
             {
                 //for (int k = 0; k < dataList[m].Rows.Count; k++) {
                 //    for (int p = 1; p < dataList[m].Columns.Count; p++) {
+
                 //        if (dataList[m].Rows[k][p].ToString() == "")
                 //        {
                 //            Console.WriteLine();
@@ -188,28 +189,20 @@ namespace CMExcel
                 //        }
                 //    }
                 //}
-                switch (m)
-                {
-                    case 0: sheetName = "sheet1"; break;
-                    case 1: sheetName = "表2机构网络情况调查表"; break;
-                    case 2: sheetName = "表3机构硬盘录像机设备调查表"; break;
-                    case 3: sheetName = "表4机构报警主机设备调查表"; break;
-                    case 4: sheetName = "表5摄像机与硬盘录像机通道对应关系统计表"; break;
-                    case 5: sheetName = "表6报警器、硬盘录像机、联动摄像机对应关系调查表"; break;
-                    case 6: sheetName = "表7报警器、报警主机、联动摄像机对应关系调查表"; break;
-                    case 7: sheetName = "表8机构门禁设备调查表"; break;
-                    case 8: sheetName = "表9机构对讲设备调查表"; break;
-                }
-                DataTable data = dataList[m];
-                if (workbook != null)
-                {
-                    sheet = workbook.CreateSheet(sheetName);
-
-                }
-                else
+                if (m>=3)
                 {
                     return -1;
                 }
+
+                switch (m)
+                {
+                    case 0: sheetName = "sheet1"; break;
+                    case 1: sheetName = "sheet2"; break;
+                    case 2: sheetName = "sheet3"; break;
+                }
+                DataTable data = dataList[m];
+                sheet = workbook.CreateSheet(sheetName);
+
 
                 if (isColumnWritten == true) //写入DataTable的列名
                 {
