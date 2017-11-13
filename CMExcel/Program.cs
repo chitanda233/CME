@@ -20,10 +20,36 @@ namespace CMExcel
         static void Main(string[] args)
         {
             DataTable x=ExcelToDataTable("test_name1.xlsx", 0, true);
+            DataTable y = ExcelToDataTable("test_name2.xlsx", 0, true);
+            DataTable z = ExcelToDataTable("test_name3.xlsx", 0, true);
+            DataTable dd=new DataTable();
+            dd = x.Clone();
+            dd.Rows.Clear();
+
+            object[] obj = new object[dd.Columns.Count];
+
+            for (int i = 0; i < x.Rows.Count; i++)
+            {
+                x.Rows[i].ItemArray.CopyTo(obj, 0);
+                dd.Rows.Add(obj);
+            }
+            for (int i = 0; i < y.Rows.Count; i++)
+            {
+                y.Rows[i].ItemArray.CopyTo(obj, 0);
+                dd.Rows.Add(obj);
+            }
+
+            for (int i = 0; i < z.Rows.Count; i++)
+            {
+                z.Rows[i].ItemArray.CopyTo(obj, 0);
+                dd.Rows.Add(obj);
+            }
+
+
             List<DataTable> dl=new List<DataTable>();
-            dl.Add(x);
+            dl.Add(dd);
             DataTableToExcel("hahah.xlsx", dl, true);
-            Console.ReadKey();
+//            Console.ReadKey();
         }
 
         static void WriteToFile(IWorkbook iw)
@@ -36,19 +62,19 @@ namespace CMExcel
 
 
         /// <summary>
-        /// 
+        /// 从一个excel中读取为dataTable
         /// </summary>
-        /// <param name="fileName"></param>
-        /// <param name="sheetPosition"></param>
-        /// <param name="isFirstRowColumn"></param>
+        /// <param name="fileName">excel文件名</param>
+        /// <param name="sheetPosition">读第几个页签,从0开始</param>
+        /// <param name="isFirstRowColumn">是不是从第一行读取，用来初始化dt的结构</param>
         /// <returns></returns>
        static public DataTable ExcelToDataTable(string fileName, int sheetPosition, bool isFirstRowColumn)
         {
             ISheet sheet = null;
             DataTable data = new DataTable();
-            
             int startRow = 0;
             IWorkbook workbook=null;
+
             try
             {
                 //读取文件并判断格式
@@ -145,7 +171,7 @@ namespace CMExcel
             string all = null;
             IWorkbook workbook=null;
 
-            var fs = new FileStream(outPutName, FileMode.Append, FileAccess.Write);
+            var fs = new FileStream(outPutName, FileMode.Create, FileAccess.Write);
             workbook = new XSSFWorkbook();
           
             for (int m = 0; m < dataList.Count; m++)
@@ -223,6 +249,8 @@ namespace CMExcel
                 return -1;
             }
         }
+
+
 
 
     }
