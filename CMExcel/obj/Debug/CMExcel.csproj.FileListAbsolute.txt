@@ -1,0 +1,11 @@
+G:\CODE\merge\CMExcel\bin\Debug\CMExcel.exe
+G:\CODE\merge\CMExcel\bin\Debug\CMExcel.pdb
+G:\CODE\merge\CMExcel\bin\Debug\NPOI.dll
+G:\CODE\merge\CMExcel\bin\Debug\NPOI.OOXML.dll
+G:\CODE\merge\CMExcel\bin\Debug\NPOI.OpenXml4Net.dll
+G:\CODE\merge\CMExcel\bin\Debug\NPOI.OpenXmlFormats.dll
+G:\CODE\merge\CMExcel\bin\Debug\ICSharpCode.SharpZipLib.dll
+G:\CODE\merge\CMExcel\obj\Debug\CMExcel.csprojResolveAssemblyReference.cache
+G:\CODE\merge\CMExcel\obj\Debug\CMExcel.csproj.CoreCompileInputs.cache
+G:\CODE\merge\CMExcel\obj\Debug\CMExcel.exe
+G:\CODE\merge\CMExcel\obj\Debug\CMExcel.pdb
