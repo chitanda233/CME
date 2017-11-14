@@ -24,10 +24,12 @@ namespace CMExcel
             DataTable outDataTable=new DataTable();
             int time = 1;
 
+            CMETools cm=new CMETools();
+
             var foInfo = new DirectoryInfo(System.Environment.CurrentDirectory);
             foreach (var file in foInfo.GetFiles("*.xls*"))
             {
-                tmpDataTable = ExcelToDataTable(file.ToString(), 0, true);
+                tmpDataTable = cm.ExcelToDataTable(file.ToString(), 0, true);
                 if (time==1)
                 {
                     outDataTable = tmpDataTable.Clone();
@@ -51,12 +53,14 @@ namespace CMExcel
                     time += 1;
                 }
             }
+            time = 1;
 
             List<DataTable> dl=new List<DataTable>();
             dl.Add(outDataTable);
-            DataTableToExcel("hahah.xlsx", dl, true);
-            tmpDataTable.Clear();
-            outDataTable.Clear();
+            tmpDataTable = null;
+            outDataTable = null;
+            cm.DataTableToExcel("hahah.xlsx", dl, true);
+           
         }
 
         static void WriteToFile(IWorkbook iw)
@@ -67,7 +71,12 @@ namespace CMExcel
             file.Close();
         }
 
+        
+    }
 
+    public class CMETools
+    {
+ 
         /// <summary>
         /// 从一个excel中读取为dataTable
         /// </summary>
@@ -75,12 +84,12 @@ namespace CMExcel
         /// <param name="sheetPosition">读第几个页签,从0开始</param>
         /// <param name="isFirstRowColumn">是不是从第一行读取，用来初始化dt的结构</param>
         /// <returns></returns>
-       static public DataTable ExcelToDataTable(string fileName, int sheetPosition, bool isFirstRowColumn)
+        public DataTable ExcelToDataTable(string fileName, int sheetPosition, bool isFirstRowColumn)
         {
             ISheet sheet = null;
             DataTable data = new DataTable();
             int startRow = 0;
-            IWorkbook workbook=null;
+            IWorkbook workbook = null;
 
             try
             {
@@ -144,7 +153,7 @@ namespace CMExcel
 
                         IRow row = sheet.GetRow(i);
                         if (row == null) continue; //没有数据的行默认是null　　
-  
+
                         DataRow dataRow = data.NewRow();
 
                         for (int j = 0; j < cellCount; j++)
@@ -168,7 +177,7 @@ namespace CMExcel
             }
         }
 
-        static  public int DataTableToExcel(string outPutName, List<DataTable> dataList, bool isColumnWritten)
+        public int DataTableToExcel(string outPutName, List<DataTable> dataList, bool isColumnWritten)
         {
             int i = 0;
             int j = 0;
@@ -176,15 +185,15 @@ namespace CMExcel
             ISheet sheet = null;
             string sheetName = null;
             string all = null;
-            IWorkbook workbook=null;
+            IWorkbook workbook = null;
 
             var fs = new FileStream(outPutName, FileMode.Create, FileAccess.Write);
             workbook = new XSSFWorkbook();
-          
+
             for (int m = 0; m < dataList.Count; m++)
             {
 
-                if (m>=3)
+                if (m >= 3)
                 {
                     return -1;
                 }
@@ -229,6 +238,7 @@ namespace CMExcel
 
                 workbook.Write(fs); //写入到excel
                 fs.Close();
+                fs = null;
                 return count;
             }
             catch (Exception ex)
@@ -238,9 +248,5 @@ namespace CMExcel
                 return -1;
             }
         }
-
-
-
-
     }
 }
