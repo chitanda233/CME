@@ -5,7 +5,6 @@ G:\CODE\CME\CME\CMExcel\bin\Release\NPOI.OOXML.dll
 G:\CODE\CME\CME\CMExcel\bin\Release\NPOI.OpenXml4Net.dll
 G:\CODE\CME\CME\CMExcel\bin\Release\NPOI.OpenXmlFormats.dll
 G:\CODE\CME\CME\CMExcel\bin\Release\ICSharpCode.SharpZipLib.dll
-G:\CODE\CME\CME\CMExcel\obj\Release\CMExcel.csprojResolveAssemblyReference.cache
 G:\CODE\CME\CME\CMExcel\obj\Release\CMExcel.csproj.CoreCompileInputs.cache
 G:\CODE\CME\CME\CMExcel\obj\Release\CMExcel.exe
 G:\CODE\CME\CME\CMExcel\obj\Release\CMExcel.pdb

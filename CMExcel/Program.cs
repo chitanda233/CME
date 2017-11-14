@@ -19,7 +19,30 @@ namespace CMExcel
     {
         static void Main(string[] args)
         {
-            string filename = args[0].ToString();
+            string filename = "";
+            if (args.Length!=1)
+            {
+                Console.WriteLine("使用说明：\nCMExcel.exe  表格名 \n" +
+                                  "会将文件夹下文件名符合  表格名_*.xls* 的文件全部合并为 表格名.xlsx\n" +
+                                  "在下方直接输入'表格名'(不包含后缀)也可执行一次\n" +
+                                  "如果符合条件的文件不存在，则会创建 表格名.xlsx 空文件");
+                while (true)
+                {
+                    filename=Console.ReadLine();
+                    if (filename=="exit")
+                    {
+                        Environment.Exit(0);
+                    }
+                    if (filename!="")
+                    {
+                        break;
+                    }
+                }
+            }
+            else
+                filename = args[0].ToString();
+                
+                
 
             DataTable tmpDataTable=new DataTable();
             DataTable outDataTable=new DataTable();
@@ -30,6 +53,10 @@ namespace CMExcel
             var foInfo = new DirectoryInfo(System.Environment.CurrentDirectory);
             foreach (var file in foInfo.GetFiles(filename+"_*.xls*"))
             {
+                if (file==null)
+                {
+                    return;
+                }
                 tmpDataTable = cm.ExcelToDataTable(file.ToString(), 0, true);
                 if (time==1)
                 {
@@ -54,12 +81,9 @@ namespace CMExcel
                     time += 1;
                 }
             }
-            time = 1;
 
             List<DataTable> dl=new List<DataTable>();
             dl.Add(outDataTable);
-            tmpDataTable = null;
-            outDataTable = null;
             cm.DataTableToExcel(filename+".xlsx", dl, true);
            
         }
