@@ -19,37 +19,44 @@ namespace CMExcel
     {
         static void Main(string[] args)
         {
-            DataTable x=ExcelToDataTable("test_name1.xlsx", 0, true);
-            DataTable y = ExcelToDataTable("test_name2.xlsx", 0, true);
-            DataTable z = ExcelToDataTable("test_name3.xlsx", 0, true);
-            DataTable dd=new DataTable();
-            dd = x.Clone();
-            dd.Rows.Clear();
 
-            object[] obj = new object[dd.Columns.Count];
+            DataTable tmpDataTable=new DataTable();
+            DataTable outDataTable=new DataTable();
+            int time = 1;
 
-            for (int i = 0; i < x.Rows.Count; i++)
+            var foInfo = new DirectoryInfo(System.Environment.CurrentDirectory);
+            foreach (var file in foInfo.GetFiles("*.xls*"))
             {
-                x.Rows[i].ItemArray.CopyTo(obj, 0);
-                dd.Rows.Add(obj);
+                tmpDataTable = ExcelToDataTable(file.ToString(), 0, true);
+                if (time==1)
+                {
+                    outDataTable = tmpDataTable.Clone();
+                    outDataTable.Rows.Clear();
+                    object[] objc = new object[outDataTable.Columns.Count];
+                    for (int i = 0; i < tmpDataTable.Rows.Count; i++)
+                    {
+                        tmpDataTable.Rows[i].ItemArray.CopyTo(objc,0);
+                        outDataTable.Rows.Add(objc);
+                    }
+                    time += 1;
+                }
+                else
+                {
+                    object[] objc = new object[outDataTable.Columns.Count];
+                    for (int i = 0; i < tmpDataTable.Rows.Count; i++)
+                    {
+                        tmpDataTable.Rows[i].ItemArray.CopyTo(objc, 0);
+                        outDataTable.Rows.Add(objc);
+                    }
+                    time += 1;
+                }
             }
-            for (int i = 0; i < y.Rows.Count; i++)
-            {
-                y.Rows[i].ItemArray.CopyTo(obj, 0);
-                dd.Rows.Add(obj);
-            }
-
-            for (int i = 0; i < z.Rows.Count; i++)
-            {
-                z.Rows[i].ItemArray.CopyTo(obj, 0);
-                dd.Rows.Add(obj);
-            }
-
 
             List<DataTable> dl=new List<DataTable>();
-            dl.Add(dd);
+            dl.Add(outDataTable);
             DataTableToExcel("hahah.xlsx", dl, true);
-//            Console.ReadKey();
+            tmpDataTable.Clear();
+            outDataTable.Clear();
         }
 
         static void WriteToFile(IWorkbook iw)
@@ -176,19 +183,7 @@ namespace CMExcel
           
             for (int m = 0; m < dataList.Count; m++)
             {
-                //for (int k = 0; k < dataList[m].Rows.Count; k++) {
-                //    for (int p = 1; p < dataList[m].Columns.Count; p++) {
 
-                //        if (dataList[m].Rows[k][p].ToString() == "")
-                //        {
-                //            Console.WriteLine();
-                //        }
-                //        all += dataList[m].Rows[k][p].ToString();
-                //        if (all=="") {
-                //            dataList[m].Rows.Remove(dataList[m].Rows[k]);
-                //        }
-                //    }
-                //}
                 if (m>=3)
                 {
                     return -1;
@@ -239,6 +234,7 @@ namespace CMExcel
             catch (Exception ex)
             {
                 Console.WriteLine("Exception: " + ex.Message);
+                Console.ReadKey();
                 return -1;
             }
         }

@@ -20,3 +20,14 @@ F:\CODE\CME\CMExcel\obj\Debug\CMExcel.csprojResolveAssemblyReference.cache
 F:\CODE\CME\CMExcel\obj\Debug\CMExcel.csproj.CoreCompileInputs.cache
 F:\CODE\CME\CMExcel\obj\Debug\CMExcel.exe
 F:\CODE\CME\CMExcel\obj\Debug\CMExcel.pdb
+G:\CODE\CME\CME\CMExcel\bin\Debug\CMExcel.exe
+G:\CODE\CME\CME\CMExcel\bin\Debug\CMExcel.pdb
+G:\CODE\CME\CME\CMExcel\bin\Debug\NPOI.dll
+G:\CODE\CME\CME\CMExcel\bin\Debug\NPOI.OOXML.dll
+G:\CODE\CME\CME\CMExcel\bin\Debug\NPOI.OpenXml4Net.dll
+G:\CODE\CME\CME\CMExcel\bin\Debug\NPOI.OpenXmlFormats.dll
+G:\CODE\CME\CME\CMExcel\bin\Debug\ICSharpCode.SharpZipLib.dll
+G:\CODE\CME\CME\CMExcel\obj\Debug\CMExcel.csprojResolveAssemblyReference.cache
+G:\CODE\CME\CME\CMExcel\obj\Debug\CMExcel.csproj.CoreCompileInputs.cache
+G:\CODE\CME\CME\CMExcel\obj\Debug\CMExcel.exe
+G:\CODE\CME\CME\CMExcel\obj\Debug\CMExcel.pdb
