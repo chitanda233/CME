@@ -19,6 +19,7 @@ namespace CMExcel
     {
         static void Main(string[] args)
         {
+            string filename = args[0].ToString();
 
             DataTable tmpDataTable=new DataTable();
             DataTable outDataTable=new DataTable();
@@ -27,7 +28,7 @@ namespace CMExcel
             CMETools cm=new CMETools();
 
             var foInfo = new DirectoryInfo(System.Environment.CurrentDirectory);
-            foreach (var file in foInfo.GetFiles("*.xls*"))
+            foreach (var file in foInfo.GetFiles(filename+"_*.xls*"))
             {
                 tmpDataTable = cm.ExcelToDataTable(file.ToString(), 0, true);
                 if (time==1)
@@ -59,7 +60,7 @@ namespace CMExcel
             dl.Add(outDataTable);
             tmpDataTable = null;
             outDataTable = null;
-            cm.DataTableToExcel("hahah.xlsx", dl, true);
+            cm.DataTableToExcel(filename+".xlsx", dl, true);
            
         }
 
